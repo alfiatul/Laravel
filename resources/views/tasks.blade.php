@@ -12,16 +12,24 @@
 					<!-- Display Validation Errors -->
 					@include('common.errors')
 
-					<!-- New Task Form -->
+							<!-- New Task Form -->
 					<form action="/task" method="POST" class="form-horizontal">
 						{{ csrf_field() }}
 
-						<!-- Task Name -->
+								<!-- Task Name -->
 						<div class="form-group">
-							<label for="task-name" class="col-sm-3 control-label">Task</label>
+							<label for="task-name" class="col-sm-3 control-label">Nama</label>
 
 							<div class="col-sm-6">
 								<input type="text" name="name" id="task-name" class="form-control" value="{{ old('task') }}">
+							</div>
+						</div>
+						<!-- Task Alamat -->
+						<div class="form-group">
+							<label for="task-name" class="col-sm-3 control-label">Alamat</label>
+
+							<div class="col-sm-6">
+								<input type="text" name="alamat" id="task-Alamat" class="form-control" value="{{ old('task') }}">
 							</div>
 						</div>
 
@@ -47,28 +55,32 @@
 					<div class="panel-body">
 						<table class="table table-striped task-table">
 							<thead>
-								<th>Task</th>
-								<th>&nbsp;</th>
+							<th>Task</th>
+							<th>Alamat</th>
+							<th>&nbsp;</th>
 							</thead>
 							<tbody>
-								@foreach ($tasks as $task)
-									<tr>
-										<td class="table-text"><div>{{ $task->name }}</div></td>
+							@foreach ($tasks as $task)
+								<tr>
+									<td class="table-text"><div>{{ $task->name }}</div></td>
+									<td class="table-text"><div>{{ $task->alamat }}</div></td>
 
-										<!-- Task Delete Button -->
-										<td>
-											<form action="/task/{{ $task->id }}" method="POST">
-												{{ csrf_field() }}
-												{{ method_field('DELETE') }}
+									<!-- Task Delete Button -->
+									<td>
+										<form action="/task/{{ $task->id }}" method="POST">
+											{{ csrf_field() }}
+											{{ method_field('DELETE') }}
 
-												<button type="submit" class="btn btn-danger">
-													<i class="fa fa-trash"></i>Delete
-												</button>
-											</form>
-                                            <a class="btn btn-danger" href="/task/{{ $task->id  }}"><button class="btn btn-danger" >Detail</button></a>
-										</td>
-									</tr>
-								@endforeach
+											<button type="submit" class="btn btn-danger">
+												<i class="fa fa-trash"></i>Delete
+											</button>
+											<a class="btn btn-warning" href="/task/{{$task->id}}">Detail</a>
+											<a class="btn btn-primary" href="/update/{{$task->id}}">Update</a>
+										</form>
+
+									</td>
+								</tr>
+							@endforeach
 							</tbody>
 						</table>
 					</div>
